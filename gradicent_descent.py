@@ -137,8 +137,8 @@ ax.plot_surface(x, t, y.T, cmap='rainbow')
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
 ax.set_zlabel('Z')
-ax.set_title('控制变量u')
-plt.savefig('/Users/mark/Downloads/状态变量y梯度下降.png')
+ax.set_title('状态变量y')
+plt.savefig('/Users/mark/Downloads/状态变量y梯度下降.png', dpi=500, bbox_inches='tight')
 plt.show()
 
 # 作图 控制变量u
@@ -149,6 +149,5 @@ plt.show()
 # ax.set_ylabel('Y')
 # ax.set_zlabel('Z')
 # ax.set_title('控制变量u')
-# plt.savefig('/Users/mark/Downloads/控制变量u梯度下降.png')
+# plt.savefig('/Users/mark/Downloads/控制变量u梯度下降.png', dpi=500, bbox_inches='tight')
 # plt.show()
-
