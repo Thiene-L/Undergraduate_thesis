@@ -96,7 +96,7 @@ p = solve_adjoints(y, L, n_iters)
 obj_vals[main_loop] = object_function(y, u)
 [obj_grad, obj_grad_norms[main_loop]] = object_gradient(u, p)
 
-print('---------------------------------------------------------------------------')
+print('-' * 100)
 print('mainLoop = ', main_loop, ', J = ', obj_vals[main_loop], ', obj_grad_norm = ', obj_grad_norms[main_loop])
 
 # 优化算法主循环
@@ -116,7 +116,7 @@ while obj_err > obj_err_tol and main_loop < max_loop:
     [obj_grad, obj_grad_norms[main_loop]] = object_gradient(u, p)
 
     obj_err = abs(obj_vals[main_loop] - obj_vals[main_loop - 1])
-    print('---------------------------------------------------------------------------')
+    print('-' * 100)
     print('mainLoop = ', main_loop, ', J = ', obj_vals[main_loop], ', obj_grad_norm = ', obj_grad_norms[main_loop])
     if obj_grad_norms[main_loop] < obj_grad_norm_tol or theta < thetaTol:
         break
@@ -128,17 +128,27 @@ while obj_err > obj_err_tol and main_loop < max_loop:
         y = oldy
         u = oldu
 
-print('---------------------------------------------------------------------------')
+print('-' * 100)
 
 # 作图 状态变量y
-# fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
-# x, t = np.meshgrid(x, t)
-# ax.plot_surface(x, t, y.T, cmap='rainbow')
-# plt.show()
-
-# 作图 控制变量u
 fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
 x, t = np.meshgrid(x, t)
-ax.plot_surface(x, t, u.T, cmap='rainbow')
+ax.plot_surface(x, t, y.T, cmap='rainbow')
+ax.set_xlabel('X')
+ax.set_ylabel('Y')
+ax.set_zlabel('Z')
+ax.set_title('控制变量u')
+plt.savefig('/Users/mark/Downloads/状态变量y梯度下降.png')
 plt.show()
+
+# 作图 控制变量u
+# fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
+# x, t = np.meshgrid(x, t)
+# ax.plot_surface(x, t, u.T, cmap='rainbow')
+# ax.set_xlabel('X')
+# ax.set_ylabel('Y')
+# ax.set_zlabel('Z')
+# ax.set_title('控制变量u')
+# plt.savefig('/Users/mark/Downloads/控制变量u梯度下降.png')
+# plt.show()
 

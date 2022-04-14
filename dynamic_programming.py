@@ -55,9 +55,9 @@ for n in range(n_iters, 0, -1):
     rhs = -1 / h * np.dot(K[n, :, :], K[n, :, :]) + 2 * K[n, :, :] * L + h * speye
     K[n - 1, :, :] = K[n, :, :] + rhs * dt
 
-print('---------------------------------------------------------------------------')
+print('-' * 100)
 print('Ricatti方程求解完毕！')
-print('---------------------------------------------------------------------------')
+print('-' * 100)
 
 # 求解状态方程
 # 创建y
@@ -68,9 +68,9 @@ y[:, 0] = y0
 for n in range(n_iters):
     y[:, n + 1] = y[:, n] + (L * y[:, n] - 1 / h * np.dot(K[n, :, :], y[:, n])) * dt
 
-print('---------------------------------------------------------------------------')
+print('-' * 100)
 print('状态方程求解完毕！')
-print('---------------------------------------------------------------------------')
+print('-' * 100)
 
 # 计算控制变量和目标泛函值
 # 创建u
@@ -81,18 +81,28 @@ for n in range(n_iters + 1):
 
 obj_val = 0.5 * np.dot(np.dot(y[:, 0], K[0, :, :]), y[:, 0].T)
 
-print('---------------------------------------------------------------------------')
+print('-' * 100)
 print('目标泛函 J = ', obj_val)
-print('---------------------------------------------------------------------------')
+print('-' * 100)
 
 # 作图 状态变量y
-fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
-x, t = np.meshgrid(x, t)
-ax.plot_surface(x, t, y.T, cmap='rainbow')
-plt.show()
-
-# 作图 控制变量u
 # fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
 # x, t = np.meshgrid(x, t)
-# ax.plot_surface(x, t, u.T, cmap='rainbow')
+# ax.plot_surface(x, t, y.T, cmap='rainbow')
+# ax.set_xlabel('X')
+# ax.set_ylabel('Y')
+# ax.set_zlabel('Z')
+# ax.set_title('状态变量y')
+# plt.savefig('/Users/mark/Downloads/状态变量y动态规划.png')
 # plt.show()
+
+# 作图 控制变量u
+fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
+x, t = np.meshgrid(x, t)
+ax.plot_surface(x, t, u.T, cmap='rainbow')
+ax.set_xlabel('X')
+ax.set_ylabel('Y')
+ax.set_zlabel('Z')
+ax.set_title('控制变量u')
+plt.savefig('/Users/mark/Downloads/控制变量u动态规划.png')
+plt.show()
